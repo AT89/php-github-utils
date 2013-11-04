@@ -2,8 +2,6 @@
 
 namespace Leibowitz\Github\Utils;
 
-use Guzzle\Http;
-
 class ProjectInfo
 {
     public function __construct($config)
@@ -15,7 +13,7 @@ class ProjectInfo
         $this->initGithubClient();
     }
 
-    function initGithubClient()
+    public function initGithubClient()
     {
         // Authentification
         $this->githubclient = new \Github\Client();
@@ -27,45 +25,27 @@ class ProjectInfo
 
     }
 
-    function getGithubClient()
+    public function getGithubClient()
     {
         return $this->githubclient;
     }
 
-    function hasProject($key)
+    public function hasProject($key)
     {
         return array_key_exists($key, $this->config['projects']);
     }
 
-    function getProjectConfig($key = null)
+    public function getProjectConfig($key = null)
     {
         return $this->config['projects'][ $key ?: $this->project_key ];
     }
 
-    function setProjectKey($key)
+    public function setProjectKey($key)
     {
         $this->project_key = $key;
     }
 
-    function getProjectCommit($project_key = null)
-    {
-        $project_data = $this->getProjectConfig($project_key);
-
-        $url = $project_data['url'];
-        $field = $project_data['field'];
-
-        // find commit hash of deployed version
-        $httpclient = new Http\Client($url);
-
-        $request = $httpclient->get();
-        $resp = $request->send();
-
-        $content = json_decode($resp->getBody(), true);
-
-        return $content[ $field ];
-    }
-
-    function getCommitDetails($commit, $project_key = null)
+    public function getCommitDetails($commit, $project_key = null)
     {
         // start to query the github api about the commit
         // get info about the commit
@@ -83,7 +63,7 @@ class ProjectInfo
         );
     }
 
-    function getBranches($project_key = null)
+    public function getBranches($project_key = null)
     {
         $project = $this->getProjectConfig($project_key);
         return $this->getGithubClient()
@@ -91,23 +71,23 @@ class ProjectInfo
             ->branches($this->config['user'], $project['name']);
     }
 
-    function addFoundBranch($branch, $index = 0)
+    public function addFoundBranch($branch, $index = 0)
     {
         // store the branches names where the commit was found
         $this->founds[ $branch ] = $index;
     }
 
-    function getFoundBranches()
+    public function getFoundBranches()
     {
         return array_keys($this->founds);
     }
 
-    function countFoundBranches()
+    public function countFoundBranches()
     {
         return count($this->founds);
     }
 
-    function getPullRequests(
+    public function getPullRequests(
         $branch = 'master',
         $state = 'closed',
         $project_key = null)
@@ -127,7 +107,7 @@ class ProjectInfo
                 ));
     }
 
-    function getAllBranchesSha($project_key = null)
+    public function getAllBranchesSha($project_key = null)
     {
         $data = array();
 
@@ -212,16 +192,5 @@ class ProjectInfo
             }
         }
 
-    }
-
-    public function getProjectInfo($project)
-    {
-        $commit = $this->getProjectCommit($project);
-
-        $details = $this->getCommitDetails($commit, $project);
-
-        $details['branches'] = $this->getBranchesForCommit($commit, $project);
-
-        return $details;
     }
 }
