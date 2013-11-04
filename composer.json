@@ -1,0 +1,24 @@
+{
+    "name": "leibowitz/github-utils",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/leibowitz/php-github-api"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Gianni Moschini",
+            "email": "gianni.moschini+composer@hailocab.com"
+        }
+    ],
+    "autoload": {
+      "psr-0": {
+        "Leibowitz\\Github\\Utils\\": "src/"
+      }
+    },
+    "require": {
+        "guzzle/guzzle": "~3.7",
+        "knplabs/github-api": "dev-modify_pull_request_params"
+    }
+}
