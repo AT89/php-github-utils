@@ -18,12 +18,12 @@ class ProjectInfo
     function initGithubClient()
     {
         // Authentification
-        $this->githubclient = new Github\Client();
+        $this->githubclient = new \Github\Client();
 
         $this->githubclient->authenticate(
             $this->config['token'],
             '',
-            Github\Client::AUTH_HTTP_TOKEN);
+            \Github\Client::AUTH_HTTP_TOKEN);
 
     }
 
