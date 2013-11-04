@@ -17,6 +17,7 @@
         "Leibowitz\\Github\\Utils\\ProjectInfo\\": "src/"
       }
     },
+    "target-dir": "Leibowitz/Github/Utils",
     "require": {
         "guzzle/guzzle": "~3.7",
         "knplabs/github-api": "dev-modify_pull_request_params"
