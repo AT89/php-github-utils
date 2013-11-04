@@ -14,7 +14,7 @@
     ],
     "autoload": {
       "psr-0": {
-        "Leibowitz\\Github\\Utils\\": "src/"
+        "Leibowitz\\Github\\Utils\\ProjectInfo\\": "src/"
       }
     },
     "require": {
