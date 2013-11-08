@@ -50,16 +50,17 @@ class ProjectInfo
         // start to query the github api about the commit
         // get info about the commit
         $project = $this->getProjectConfig($project_key);
+
         $commit_details = $this->getGithubClient()
-            ->api('repo')
+            ->api('git')
             ->commits()
             ->show($this->config['user'], $project['name'], $commit);
 
         return array(
-            'author' => $commit_details['commit']['author']['name'],
-            'date' => $commit_details['commit']['author']['date'],
-            'message' => $commit_details['commit']['message'],
-            'url' => $commit_details['html_url']
+            'author' => $commit_details['author']['name'],
+            'date' => $commit_details['author']['date'],
+            'message' => $commit_details['message'],
+            'url' => $commit_details['url']
         );
     }
 
