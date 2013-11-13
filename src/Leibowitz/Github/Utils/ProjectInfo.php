@@ -60,7 +60,7 @@ class ProjectInfo
             'author' => $commit_details['author']['name'],
             'date' => $commit_details['author']['date'],
             'message' => $commit_details['message'],
-            'url' => $commit_details['url']
+            'url' => $commit_details['html_url']
         );
     }
 
